@@ -1,0 +1,319 @@
+# HTML snippets for Espanso 2.x
+# Install in %APPDATA%\espanso\match\html.yml
+# Type :tag then Space. $|$ marks the cursor position.
+matches:
+
+  # Document and block elements
+  - trigger: ":html"
+    word: true
+    replace: "<html>$|$</html>"
+  - trigger: ":head"
+    word: true
+    replace: "<head>$|$</head>"
+  - trigger: ":body"
+    word: true
+    replace: "<body>$|$</body>"
+  - trigger: ":article"
+    word: true
+    replace: "<article>$|$</article>"
+  - trigger: ":section"
+    word: true
+    replace: "<section>$|$</section>"
+  - trigger: ":nav"
+    word: true
+    replace: "<nav>$|$</nav>"
+  - trigger: ":aside"
+    word: true
+    replace: "<aside>$|$</aside>"
+  - trigger: ":header"
+    word: true
+    replace: "<header>$|$</header>"
+  - trigger: ":footer"
+    word: true
+    replace: "<footer>$|$</footer>"
+  - trigger: ":main"
+    word: true
+    replace: "<main>$|$</main>"
+  - trigger: ":address"
+    word: true
+    replace: "<address>$|$</address>"
+  - trigger: ":div"
+    word: true
+    replace: "<div>$|$</div>"
+  - trigger: ":blockquote"
+    word: true
+    replace: "<blockquote>$|$</blockquote>"
+  - trigger: ":pre"
+    word: true
+    replace: "<pre>$|$</pre>"
+  - trigger: ":figure"
+    word: true
+    replace: "<figure>$|$</figure>"
+  - trigger: ":figcaption"
+    word: true
+    replace: "<figcaption>$|$</figcaption>"
+  - trigger: ":ul"
+    word: true
+    replace: "<ul>$|$</ul>"
+  - trigger: ":ol"
+    word: true
+    replace: "<ol>$|$</ol>"
+  - trigger: ":menu"
+    word: true
+    replace: "<menu>$|$</menu>"
+  - trigger: ":dl"
+    word: true
+    replace: "<dl>$|$</dl>"
+  - trigger: ":table"
+    word: true
+    replace: "<table>$|$</table>"
+  - trigger: ":thead"
+    word: true
+    replace: "<thead>$|$</thead>"
+  - trigger: ":tbody"
+    word: true
+    replace: "<tbody>$|$</tbody>"
+  - trigger: ":tfoot"
+    word: true
+    replace: "<tfoot>$|$</tfoot>"
+  - trigger: ":row"
+    word: true
+    replace: "<tr>$|$</tr>"
+  - trigger: ":colgroup"
+    word: true
+    replace: "<colgroup>$|$</colgroup>"
+  - trigger: ":hform"
+    word: true
+    replace: "<form action=\"\" method=\"post\">$|$</form>"
+  - trigger: ":fieldset"
+    word: true
+    replace: "<fieldset>$|$</fieldset>"
+  - trigger: ":datalist"
+    word: true
+    replace: "<datalist>$|$</datalist>"
+  - trigger: ":select"
+    word: true
+    replace: "<select>$|$</select>"
+  - trigger: ":optgroup"
+    word: true
+    replace: "<optgroup label=\"\">$|$</optgroup>"
+  - trigger: ":details"
+    word: true
+    replace: "<details>$|$</details>"
+  - trigger: ":dialog"
+    word: true
+    replace: "<dialog>$|$</dialog>"
+  - trigger: ":canvas"
+    word: true
+    replace: "<canvas>$|$</canvas>"
+  - trigger: ":template"
+    word: true
+    replace: "<template>$|$</template>"
+  - trigger: ":style"
+    word: true
+    replace: "<style>$|$</style>"
+  - trigger: ":script"
+    word: true
+    replace: "<script>$|$</script>"
+  - trigger: ":noscript"
+    word: true
+    replace: "<noscript>$|$</noscript>"
+
+  # Text and inline elements
+  - trigger: ":title"
+    word: true
+    replace: "<title>$|$</title>"
+  - trigger: ":para"
+    word: true
+    replace: "<p>$|$</p>"
+  - trigger: ":url"
+    word: true
+    replace: "<a href=\"\">$|$</a>"
+  - trigger: ":span"
+    word: true
+    replace: "<span>$|$</span>"
+  - trigger: ":h1"
+    word: true
+    replace: "<h1>$|$</h1>"
+  - trigger: ":h2"
+    word: true
+    replace: "<h2>$|$</h2>"
+  - trigger: ":h3"
+    word: true
+    replace: "<h3>$|$</h3>"
+  - trigger: ":h4"
+    word: true
+    replace: "<h4>$|$</h4>"
+  - trigger: ":h5"
+    word: true
+    replace: "<h5>$|$</h5>"
+  - trigger: ":h6"
+    word: true
+    replace: "<h6>$|$</h6>"
+  - trigger: ":item"
+    word: true
+    replace: "<li>$|$</li>"
+  - trigger: ":dt"
+    word: true
+    replace: "<dt>$|$</dt>"
+  - trigger: ":dd"
+    word: true
+    replace: "<dd>$|$</dd>"
+  - trigger: ":strong"
+    word: true
+    replace: "<strong>$|$</strong>"
+  - trigger: ":em"
+    word: true
+    replace: "<em>$|$</em>"
+  - trigger: ":small"
+    word: true
+    replace: "<small>$|$</small>"
+  - trigger: ":mark"
+    word: true
+    replace: "<mark>$|$</mark>"
+  - trigger: ":del"
+    word: true
+    replace: "<del>$|$</del>"
+  - trigger: ":ins"
+    word: true
+    replace: "<ins>$|$</ins>"
+  - trigger: ":sub"
+    word: true
+    replace: "<sub>$|$</sub>"
+  - trigger: ":kbd"
+    word: true
+    replace: "<kbd>$|$</kbd>"
+  - trigger: ":samp"
+    word: true
+    replace: "<samp>$|$</samp>"
+  - trigger: ":var"
+    word: true
+    replace: "<var>$|$</var>"
+  - trigger: ":abbr"
+    word: true
+    replace: "<abbr>$|$</abbr>"
+  - trigger: ":cite"
+    word: true
+    replace: "<cite>$|$</cite>"
+  - trigger: ":time"
+    word: true
+    replace: "<time>$|$</time>"
+  - trigger: ":data"
+    word: true
+    replace: "<data>$|$</data>"
+  - trigger: ":label"
+    word: true
+    replace: "<label for=\"\">$|$</label>"
+  - trigger: ":legend"
+    word: true
+    replace: "<legend>$|$</legend>"
+  - trigger: ":button"
+    word: true
+    replace: "<button type=\"button\">$|$</button>"
+  - trigger: ":option"
+    word: true
+    replace: "<option value=\"\">$|$</option>"
+  - trigger: ":output"
+    word: true
+    replace: "<output>$|$</output>"
+  - trigger: ":progress"
+    word: true
+    replace: "<progress value=\"0\" max=\"100\">$|$</progress>"
+  - trigger: ":meter"
+    word: true
+    replace: "<meter value=\"0\" min=\"0\" max=\"100\">$|$</meter>"
+  - trigger: ":summary"
+    word: true
+    replace: "<summary>$|$</summary>"
+  - trigger: ":caption"
+    word: true
+    replace: "<caption>$|$</caption>"
+  - trigger: ":tabh"
+    word: true
+    replace: "<th>$|$</th>"
+  - trigger: ":cell"
+    word: true
+    replace: "<td>$|$</td>"
+
+  # Void elements
+  - trigger: ":area"
+    word: true
+    replace: "<area shape=\"rect\" coords=\"\" href=\"$|$\" alt=\"\">"
+  - trigger: ":base"
+    word: true
+    replace: "<base href=\"$|$\">"
+  - trigger: ":blank"
+    word: true
+    replace: "<br>"
+  - trigger: ":col"
+    word: true
+    replace: "<col>"
+  - trigger: ":embed"
+    word: true
+    replace: "<embed src=\"$|$\" type=\"\">"
+  - trigger: ":rule"
+    word: true
+    replace: "<hr>"
+  - trigger: ":img"
+    word: true
+    replace: "<img src=\"$|$\" alt=\"\">"
+  - trigger: ":input"
+    word: true
+    replace: "<input type=\"text\" id=\"$|$\" name=\"\">"
+  - trigger: ":link"
+    word: true
+    replace: "<link rel=\"stylesheet\" href=\"$|$\">"
+  - trigger: ":meta"
+    word: true
+    replace: "<meta name=\"$|$\" content=\"\">"
+  - trigger: ":source"
+    word: true
+    replace: "<source src=\"$|$\" type=\"\">"
+  - trigger: ":track"
+    word: true
+    replace: "<track src=\"$|$\" kind=\"subtitles\" srclang=\"en\" label=\"English\">"
+  - trigger: ":wbr"
+    word: true
+    replace: "<wbr>"
+
+  # Additional common elements
+  - trigger: ":textarea"
+    word: true
+    replace: "<textarea id=\"\" name=\"\" rows=\"4\" cols=\"40\">$|$</textarea>"
+  - trigger: ":video"
+    word: true
+    replace: "<video controls src=\"\">$|$</video>"
+  - trigger: ":audio"
+    word: true
+    replace: "<audio controls src=\"\">$|$</audio>"
+  - trigger: ":iframe"
+    word: true
+    replace: "<iframe src=\"\" title=\"\">$|$</iframe>"
+  - trigger: ":picture"
+    word: true
+    replace: "<picture>$|$</picture>"
+  - trigger: ":map"
+    word: true
+    replace: "<map>$|$</map>"
+  - trigger: ":object"
+    word: true
+    replace: "<object>$|$</object>"
+  - trigger: ":ruby"
+    word: true
+    replace: "<ruby>$|$</ruby>"
+  - trigger: ":rt"
+    word: true
+    replace: "<rt>$|$</rt>"
+  - trigger: ":rp"
+    word: true
+    replace: "<rp>$|$</rp>"
+  - trigger: ":bdi"
+    word: true
+    replace: "<bdi>$|$</bdi>"
+  - trigger: ":bdo"
+    word: true
+    replace: "<bdo>$|$</bdo>"
+
+  - trigger: ":code"
+    word: true
+    replace: "<code>$|$</code>"  
