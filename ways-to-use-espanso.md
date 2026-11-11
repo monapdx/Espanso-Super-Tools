@@ -53,6 +53,8 @@ Here is how the actual trigger would be setup as YAML:
     replace: "#e69dfc"
 ```
 
+If you want to setup your own color vocabulary using Espanso, you can download mycolor.yml or copy and paste that trigger into your match.yml file. That will make a form popup, asking for the hex code and the name you want to use for it. Then when you submit it, it will write the trigger and add it to a file called mycolors.yml.
+
 	
 Never copy and paste another color code when writing CSS again. You're welcome.
 
