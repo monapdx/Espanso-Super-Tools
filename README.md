@@ -20,7 +20,7 @@ Inside of that folder, there should be a file called `match.yml`
 
 You can open that in any text editor like Notepad++ and start adding triggers for the tasks you want to speed up and make simpler.
 
-`triggers.bat` can be double clicked after adding new triggers, and it will run the Python script `espanso-shortcuts.py` which generates a markdown file called `espanso-shortcuts.md` containing a table that lists all of your triggers and YML files you organize them into, with a blank column where you can write a short description of each one. Running the bat file does not overwrite your previously written descriptions, it only adds new triggers to the table.
+**[`triggers.bat`](https://github.com/monapdx/Espanso-Super-Tools/blob/main/triggers.bat)** can be double clicked after adding new triggers, and it will run the Python script `espanso-shortcuts.py` which generates a markdown file called `espanso-shortcuts.md` containing a table that lists all of your triggers and YML files you organize them into, with a blank column where you can write a short description of each one. Running the bat file does not overwrite your previously written descriptions, it only adds new triggers to the table.
 
 
 
