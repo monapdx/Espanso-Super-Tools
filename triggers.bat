@@ -1,15 +1,13 @@
 @echo off
 setlocal
-cd /d "%APPDATA%\espanso\match"
-if errorlevel 1 goto failed
-python "%CD%\espanso-shortcuts.py"
+python "%~dp0espanso-shortcuts.py" --match-dir "%APPDATA%\espanso\match"
 if errorlevel 1 goto failed
 echo.
-echo Updated: "%CD%\espanso-shortcuts.md"
+echo Updated: "%APPDATA%\espanso\match\espanso-shortcuts.md"
 pause
 exit /b 0
 :failed
 echo.
-echo Update failed. Check the error above.
+echo Update failed. Check the error above. Install dependencies with: python -m pip install -r "%~dp0requirements.txt"
 pause
 exit /b 1

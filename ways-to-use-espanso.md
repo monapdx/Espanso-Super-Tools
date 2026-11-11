@@ -14,15 +14,7 @@ So for example:
 
 `:section = <section></section>`
 
-Single letter triggers are not advised, since they eliminate any longer trigger that begins with the same letter. 
-
-For example, the bold element.
-
-If you make the trigger :b then anything else beginning with :b won't work because it will already have replaced the text with `<b></b>`
-
-Instead, go with something like :bold instead.
-
-Same goes for the paragraph tag. I used :para instead of just :p
+Short triggers can expand before you finish typing a longer one if they expand immediately. Adding `word: true` makes Espanso wait for a word boundary, such as Space. The HTML pack uses that setting. Memorable names like `:para` are also useful when you want to avoid collisions with your own shortcuts.
 
 Here is how the actual triggers would be setup as YAML:
 
@@ -53,9 +45,10 @@ Here is how the actual trigger would be setup as YAML:
     replace: "#e69dfc"
 ```
 
-If you want to setup your own color vocabulary using Espanso, you can download **[mycolor.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/mycolor.yml)** or copy and paste that trigger into your match.yml file. That will make a form popup, asking for the hex code and the name you want to use for it. Then when you submit it, it will write the trigger and add it to a file called mycolors.yml.
+To create your own color vocabulary, download **[espanso-mycolor.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-mycolor.zip)** into your Espanso match folder and extract it there. Run `setup-windows.bat` inside the extracted folder once, then restart Espanso. Python 3.10+ with tkinter is required; setup installs PyYAML and sets the script path.
 
-	
+Type `:mycolor` to open the form. Enter a name and hex code, then save the trigger or generate YAML to paste yourself. **`mycolor.yml` defines the form; the separate `mycolors.yml` stores the color triggers you create.** See the [complete installation instructions](Triggers/Triggers.md#custom-color-names).
+
 Never copy and paste another color code when writing CSS again. You're welcome.
 
 ## Contact Emails
@@ -136,6 +129,7 @@ For example, here is one of my triggers that outlines every element on the page,
         el.style.outline = "1px solid magenta";
       }); 
 ```
+
 
 
 

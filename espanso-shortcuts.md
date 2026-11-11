@@ -1,9 +1,110 @@
 # Espanso Shortcuts
 
-**2 shortcuts**
+**104 shortcuts**
 
 | Trigger | File | Description |
 | --- | --- | --- |
-| `:mdtable` | base | form for generating markdown tables |
-| `:mycolor` | mycolors | form for adding triggers for hex color codes |
-
+| <code>:abbr</code> | html.yml |  |
+| <code>:address</code> | html.yml |  |
+| <code>:area</code> | html.yml |  |
+| <code>:article</code> | html.yml |  |
+| <code>:aside</code> | html.yml |  |
+| <code>:audio</code> | html.yml |  |
+| <code>:base</code> | html.yml |  |
+| <code>:bdi</code> | html.yml |  |
+| <code>:bdo</code> | html.yml |  |
+| <code>:blank</code> | html.yml |  |
+| <code>:blockquote</code> | html.yml |  |
+| <code>:body</code> | html.yml |  |
+| <code>:button</code> | html.yml |  |
+| <code>:canvas</code> | html.yml |  |
+| <code>:caption</code> | html.yml |  |
+| <code>:cell</code> | html.yml |  |
+| <code>:cite</code> | html.yml |  |
+| <code>:code</code> | html.yml |  |
+| <code>:col</code> | html.yml |  |
+| <code>:colgroup</code> | html.yml |  |
+| <code>:data</code> | html.yml |  |
+| <code>:datalist</code> | html.yml |  |
+| <code>:dd</code> | html.yml |  |
+| <code>:del</code> | html.yml |  |
+| <code>:details</code> | html.yml |  |
+| <code>:dialog</code> | html.yml |  |
+| <code>:div</code> | html.yml |  |
+| <code>:dl</code> | html.yml |  |
+| <code>:dt</code> | html.yml |  |
+| <code>:em</code> | html.yml |  |
+| <code>:embed</code> | html.yml |  |
+| <code>:fieldset</code> | html.yml |  |
+| <code>:figcaption</code> | html.yml |  |
+| <code>:figure</code> | html.yml |  |
+| <code>:footer</code> | html.yml |  |
+| <code>:h1</code> | html.yml |  |
+| <code>:h2</code> | html.yml |  |
+| <code>:h3</code> | html.yml |  |
+| <code>:h4</code> | html.yml |  |
+| <code>:h5</code> | html.yml |  |
+| <code>:h6</code> | html.yml |  |
+| <code>:head</code> | html.yml |  |
+| <code>:header</code> | html.yml |  |
+| <code>:hform</code> | html.yml |  |
+| <code>:html</code> | html.yml |  |
+| <code>:iframe</code> | html.yml |  |
+| <code>:img</code> | html.yml |  |
+| <code>:input</code> | html.yml |  |
+| <code>:ins</code> | html.yml |  |
+| <code>:item</code> | html.yml |  |
+| <code>:kbd</code> | html.yml |  |
+| <code>:label</code> | html.yml |  |
+| <code>:legend</code> | html.yml |  |
+| <code>:link</code> | html.yml |  |
+| <code>:main</code> | html.yml |  |
+| <code>:map</code> | html.yml |  |
+| <code>:mark</code> | html.yml |  |
+| <code>:mdtable</code> | table-generator.yml |  |
+| <code>:menu</code> | html.yml |  |
+| <code>:meta</code> | html.yml |  |
+| <code>:meter</code> | html.yml |  |
+| <code>:mycolor</code> | espanso-mycolor/mycolor.yml |  |
+| <code>:nav</code> | html.yml |  |
+| <code>:noscript</code> | html.yml |  |
+| <code>:object</code> | html.yml |  |
+| <code>:ol</code> | html.yml |  |
+| <code>:optgroup</code> | html.yml |  |
+| <code>:option</code> | html.yml |  |
+| <code>:output</code> | html.yml |  |
+| <code>:para</code> | html.yml |  |
+| <code>:picture</code> | html.yml |  |
+| <code>:pre</code> | html.yml |  |
+| <code>:progress</code> | html.yml |  |
+| <code>:row</code> | html.yml |  |
+| <code>:rp</code> | html.yml |  |
+| <code>:rt</code> | html.yml |  |
+| <code>:ruby</code> | html.yml |  |
+| <code>:rule</code> | html.yml |  |
+| <code>:samp</code> | html.yml |  |
+| <code>:script</code> | html.yml |  |
+| <code>:section</code> | html.yml |  |
+| <code>:select</code> | html.yml |  |
+| <code>:small</code> | html.yml |  |
+| <code>:source</code> | html.yml |  |
+| <code>:span</code> | html.yml |  |
+| <code>:strong</code> | html.yml |  |
+| <code>:style</code> | html.yml |  |
+| <code>:sub</code> | html.yml |  |
+| <code>:summary</code> | html.yml |  |
+| <code>:tabh</code> | html.yml |  |
+| <code>:table</code> | html.yml |  |
+| <code>:tbody</code> | html.yml |  |
+| <code>:template</code> | html.yml |  |
+| <code>:textarea</code> | html.yml |  |
+| <code>:tfoot</code> | html.yml |  |
+| <code>:thead</code> | html.yml |  |
+| <code>:time</code> | html.yml |  |
+| <code>:title</code> | html.yml |  |
+| <code>:track</code> | html.yml |  |
+| <code>:ul</code> | html.yml |  |
+| <code>:url</code> | html.yml |  |
+| <code>:var</code> | html.yml |  |
+| <code>:video</code> | html.yml |  |
+| <code>:wbr</code> | html.yml |  |
