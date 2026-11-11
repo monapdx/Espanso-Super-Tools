@@ -1,29 +1,12 @@
 # Espanso table template (Windows / PowerShell).
-# Save in Espanso's match folder and type :table.
+# Save in Espanso's match folder and type :mdtable.
 # Edit the dropdown options and field labels below to customize.
 # Outputs Markdown and HTML source; does not send anything.
 
 matches:
-- trigger: :table
-  force_clipboard: true
-  replace: |
-    ## Markdown version
-
-    | Field | Value |
-    | --- | --- |
-    | **Selection 1:** | {{table_form.selection_one}} |
-    | **Selection 2:** | {{table_form.selection_two}} |
-    | **Title:** | {{table_form.title}} |
-
-    ```text
-    {{table_form.content}}
-    ```
-
-    ## HTML version
-
-    ```html
-    {{table_html}}
-    ```
+- trigger: :mdtable
+  force_mode: clipboard
+  replace: "{{table_markdown}}"
   vars:
   - name: table_form
     type: form
@@ -185,3 +168,39 @@ matches:
           }
         )
         [Console]::Write($html)
+
+  - name: table_markdown
+    type: shell
+    depends_on:
+    - table_form
+    - table_html
+    params:
+      shell: powershell
+      cmd: |
+        $ErrorActionPreference = 'Stop'
+        [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+        function Escape-Cell([string]$value) {
+          return [System.Net.WebUtility]::HtmlEncode($value).Replace('|', '&#124;').Replace("`r`n", '<br>').Replace("`n", '<br>').Replace("`r", '<br>')
+        }
+        function Fence-Block([string]$value, [string]$language) {
+          $length = 3
+          foreach ($run in [regex]::Matches($value, '~+')) {
+            $length = [Math]::Max($length, $run.Length + 1)
+          }
+          $fence = '~' * $length
+          return $fence + $language + "`n" + $value + "`n" + $fence
+        }
+        $one = Escape-Cell $env:ESPANSO_TABLE_FORM_SELECTION_ONE
+        $two = Escape-Cell $env:ESPANSO_TABLE_FORM_SELECTION_TWO
+        $title = Escape-Cell $env:ESPANSO_TABLE_FORM_TITLE
+        $content = Fence-Block $env:ESPANSO_TABLE_FORM_CONTENT 'text'
+        $html = Fence-Block $env:ESPANSO_TABLE_HTML 'html'
+        $output = @(
+          '## Markdown version', '',
+          '| Field | Value |', '| --- | --- |',
+          "| **Selection 1:** | $one |",
+          "| **Selection 2:** | $two |",
+          "| **Title:** | $title |", '',
+          $content, '', '## HTML version', '', $html
+        ) -join "`n"
+        [Console]::Write($output)

@@ -1,63 +1,104 @@
-"""Create a Markdown index beside this script in the Espanso match folder."""
-
-import os
+"""Index actual Espanso YAML matches while preserving editable descriptions."""
+import argparse
+import html
 import re
 import shutil
+from collections import Counter
 from pathlib import Path
+import yaml
 
 
-match_dir = Path(__file__).resolve().parent
-output = match_dir / "espanso-shortcuts.md"
-pattern = re.compile(r'^\s*-?\s*trigger:\s*[\'\"]?([^\'\"\s#]+)')
+def cell(value):
+    return html.escape(str(value), quote=False).replace('|', '&#124;').replace('\r', '').replace('\n', '<br>')
 
-if not match_dir.is_dir():
-    raise SystemExit(f"Espanso match folder not found: {match_dir}")
 
-rows = []
-for path in sorted(match_dir.rglob("*")):
-    if path.suffix.lower() not in {".yml", ".yaml"}:
-        continue
-    for line in path.read_text(encoding="utf-8-sig").splitlines():
-        found = pattern.match(line)
-        if found:
-            rows.append((found.group(1), path.stem))
-
-rows.sort(key=lambda row: (row[0].lower(), row[1].lower()))
-
-# Read descriptions before regenerating the table. Match both columns so
-# identical triggers in different match files keep their own descriptions.
-descriptions = {}
-if output.exists():
+def read_descriptions(output, rows):
+    descriptions = {}
+    # Legacy indexes used stems; migrate only when the stem identifies one file.
+    stems = {}
+    for _, filename in rows:
+        stems.setdefault(Path(filename).stem, set()).add(filename)
+    if not output.exists():
+        return descriptions
     headers = None
-    for line in output.read_text(encoding="utf-8-sig").splitlines():
-        if not line.strip().startswith("|"):
+    for line in output.read_text(encoding='utf-8-sig').splitlines():
+        if not line.strip().startswith('|'):
             continue
-        cells = [cell.strip() for cell in re.split(r"(?<!\\)\|", line.strip())[1:-1]]
-        if "Trigger" in cells and "File" in cells:
+        cells = [c.strip() for c in re.split(r'(?<!\\)\|', line.strip())[1:-1]]
+        if all(h in cells for h in ('Trigger', 'File', 'Description')):
             headers = cells
             continue
-        if headers is None or "Description" not in headers or len(cells) != len(headers):
+        if headers is None or len(cells) != len(headers):
             continue
-        trigger = cells[headers.index("Trigger")].strip("`")
-        filename = cells[headers.index("File")]
-        descriptions[(trigger, filename)] = cells[headers.index("Description")]
+        trigger = html.unescape(cells[headers.index('Trigger')].removeprefix('<code>').removesuffix('</code>').strip('`'))
+        filename = html.unescape(cells[headers.index('File')])
+        description = cells[headers.index('Description')]
+        if filename in stems and len(stems[filename]) == 1:
+            filename = next(iter(stems[filename]))
+        descriptions[(trigger, filename)] = description
+    return descriptions
 
-lines = [
-    "# Espanso Shortcuts",
-    "",
-    f"**{len(rows)} shortcuts**",
-    "",
-    "| Trigger | File | Description |",
-    "| --- | --- | --- |",
-]
-lines.extend(
-    f"| `{trigger}` | {filename} | {descriptions.get((trigger, filename), '')} |"
-    for trigger, filename in rows
-)
-# Keep the previous table as a backup and replace only after writing succeeds.
-temporary = output.with_suffix(".md.tmp")
-temporary.write_text("\n".join(lines) + "\n", encoding="utf-8")
-if output.exists():
-    shutil.copy2(output, output.with_suffix(".md.bak"))
-temporary.replace(output)
-print(f"Saved {len(rows)} shortcuts to {output}")
+
+def collect(folder):
+    rows = []
+    for path in sorted(folder.rglob('*')):
+        if path.suffix.lower() not in {'.yml', '.yaml'}:
+            continue
+        try:
+            data = yaml.safe_load(path.read_text(encoding='utf-8-sig'))
+            if data is None:
+                continue
+            if not isinstance(data, dict):
+                raise ValueError('expected a YAML mapping')
+            matches = data.get('matches', [])
+            if not isinstance(matches, list):
+                raise ValueError('matches must be a list')
+            for match in matches:
+                if not isinstance(match, dict):
+                    raise ValueError('each match must be a mapping')
+                triggers = match.get('triggers', [])
+                if not isinstance(triggers, list):
+                    raise ValueError('triggers must be a list')
+                triggers = list(triggers)
+                if 'trigger' in match:
+                    triggers.append(match['trigger'])
+                if any(not isinstance(t, str) for t in triggers):
+                    raise ValueError('triggers must be strings')
+                rows.extend((t, path.relative_to(folder).as_posix()) for t in dict.fromkeys(triggers))
+        except (ValueError, yaml.YAMLError, UnicodeError, OSError) as error:
+            raise ValueError(f'{path}: {error}') from error
+    return sorted(rows, key=lambda row: (row[0].lower(), row[1].lower()))
+
+
+def generate(folder, output):
+    folder = Path(folder).resolve()
+    output = Path(output).resolve()
+    if not folder.is_dir():
+        raise ValueError(f'Match folder not found: {folder}')
+    rows = collect(folder)  # Complete validation before touching existing output.
+    descriptions = read_descriptions(output, rows)
+    lines = ['# Espanso Shortcuts', '', f'**{len(rows)} shortcuts**', '',
+             '| Trigger | File | Description |', '| --- | --- | --- |']
+    lines.extend(f'| <code>{cell(t)}</code> | {cell(f)} | {descriptions.get((t, f), "")} |' for t, f in rows)
+    temporary = output.with_suffix('.md.tmp')
+    temporary.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    if output.exists():
+        shutil.copy2(output, output.with_suffix('.md.bak'))
+    temporary.replace(output)
+    for trigger, count in Counter(t for t, _ in rows).items():
+        if count > 1:
+            print(f'Note: {trigger} appears {count} times; check whether these are intentional app-specific matches.')
+    return len(rows)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--match-dir', type=Path, default=Path(__file__).resolve().parent)
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args()
+    try:
+        destination = args.output or args.match_dir / 'espanso-shortcuts.md'
+        count = generate(args.match_dir, destination)
+        print(f'Saved {count} shortcuts to {destination}')
+    except (ValueError, OSError) as error:
+        parser.exit(1, f'Index not updated: {error}\n')
