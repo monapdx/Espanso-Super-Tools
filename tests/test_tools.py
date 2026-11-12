@@ -58,8 +58,8 @@ class IndexTests(unittest.TestCase):
 
     def test_bundled_yaml_has_unique_triggers(self):
         rows=index.collect(ROOT/'Triggers')
-        self.assertEqual(len(rows),103)
-        self.assertEqual(len({t for t,_ in rows}),103)
+        self.assertEqual(len(rows),117)
+        self.assertEqual(len({t for t,_ in rows}),len(rows))
         self.assertIn((':mdtable','table-generator.yml'),rows)
         table=yaml.safe_load((ROOT/'Triggers/table-generator.yml').read_text())['matches'][0]
         self.assertEqual(table['replace'],'{{table_markdown}}')

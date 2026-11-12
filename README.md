@@ -4,7 +4,7 @@
 
 > A collection of scripts, tools, and YAML trigger collections to help you supercharge your use of Espanso.
 
-[![Triggers](https://img.shields.io/badge/%E2%AD%90Triggers-FF2BD6?style=for-the-badge)](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/Triggers.md) [![Examples](https://img.shields.io/badge/%F0%9F%94%8D%20Examples-FF2BD6?style=for-the-badge&logoColor=000000)](https://github.com/monapdx/Espanso-Super-Tools/blob/main/ways-to-use-espanso.md) [![Download](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20Download-FF2BD6?style=for-the-badge)](https://github.com/monapdx/Espanso-Super-Tools/archive/refs/tags/1.0.0.zip) 
+[![Triggers](https://img.shields.io/badge/%E2%AD%90Triggers-FF2BD6?style=for-the-badge)](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/Triggers.md) [![Examples](https://img.shields.io/badge/%F0%9F%94%8D%20Examples-FF2BD6?style=for-the-badge&logoColor=000000)](https://github.com/monapdx/Espanso-Super-Tools/blob/main/ways-to-use-espanso.md) [![Download](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20Download-FF2BD6?style=for-the-badge)](https://github.com/monapdx/Espanso-Super-Tools/archive/refs/heads/main.zip) 
 
 ## What is Espanso?
 

@@ -48,7 +48,7 @@ Use the same name again if you want to change its color. It will show you the ol
 
 ## Markdown
 
-**[Download markdown.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/markdown.yml)**
+**[Download markdown.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/markdown.yml)**
 
 `markdown.yml` is a collection of triggers that make it much faster to use markdown conventions. 
 
@@ -56,29 +56,29 @@ It includes triggers to create code blocks (even nested ones that contain markdo
 
 ## Obsidian
 
-**[Download obsidian.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/obsidian.yml)**
+**[Download obsidian.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/obsidian.yml)**
 
 `obsidian.yml` is a collection of triggers for use with the popular note taking software Obsidian. 
 
-It has triggers for automatically adding frontmatter to notes depending on the type of content, and even a form that will help you generate a manifest.js file for creating an Obsidian plugin.
+It has triggers for automatically adding frontmatter to notes depending on the type of content, and even a form that will help you create an Obsidian plugin starter, including `manifest.json`, `main.js`, and other starter files. The plugin starter needs Windows PowerShell; the note templates work on any platform.
 
 ## Espanso Quizzes
 
-**[Download espanso-quiz-builder.zip](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/espanso-quiz-builder.zip)**
+**[Download espanso-quiz-builder.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-quiz-builder.zip)**
 
-After you download, extract the files and move them into your `/match` folder for Espanso.
+After you download, extract the ZIP contents directly into your Espanso `match` folder. Check that `quiz-builder.yml` is directly inside `match`, with the `quiz-builder` folder beside it. Do not leave them inside an extra outer folder. Restart Espanso. This one needs Espanso 2.x and Windows PowerShell.
 
-You should now be able to use the trigger :quiz to make a form popup. Enter a title and description for your quiz, and one correct answer per line, then submit. It will create a folder called /Espanso-Quizzes in Documents, and save new quizzes to that location. 
+You should now be able to use the trigger :quiz to make a form popup. Enter a title and description for your quiz, and one correct answer per line, then submit. It will create a folder called `Espanso Quizzes` in Documents, and save new quizzes to that location. 
 
 ## Github Issue Template Generator
 
-**[Download github-issue-builder.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/github-issue-builder.yml)**
+**[Download github-issue-builder.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/github-issue-builder.yml)**
 
-This will pull up an Espanso form that helps you generate valid YAML for Github Issue Templates.
+Type `:issueform` to pull up an Espanso form that helps you generate valid YAML for Github Issue Templates. Type `:issuefield` to add another field. This one needs Windows PowerShell.
 
 ## Github Searches
 
-**[Download github-searches.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/github-searches.yml)**
+**[Download github-searches.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/github-searches.yml)**
 
 This is a YAML file with several useful Github searches assigned to triggers. Change the trigger names, add your own, etc.
 
