@@ -45,3 +45,19 @@ If you'd rather add the trigger to a file yourself, choose **Generate YAML only*
 **`mycolor.yml` is the trigger that brings up the form. `mycolors.yml` is the separate file where it stores the color triggers you add.** The second file gets created when you save your first color.
 
 Use the same name again if you want to change its color. It will show you the old code and ask before replacing it. If that name is already used by a trigger in another YAML file, it will ask you to choose a different name instead.
+
+## Markdown
+
+**[Download markdown.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/markdown.yml)**
+
+`markdown.yml` is a collection of triggers that make it much faster to use markdown conventions. 
+
+It includes triggers to create code blocks (even nested ones that contain markdown themselves), inline code, bold links, etc. 
+
+## Obsidian
+
+**[Download obsidian.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/obsidian.yml)**
+
+`obsidian.yml` is a collection of triggers for use with the popular note taking software Obsidian. 
+
+It has triggers for automatically adding frontmatter to notes depending on the type of content, and even a form that will help you generate a manifest.js file for creating an Obsidian plugin.
