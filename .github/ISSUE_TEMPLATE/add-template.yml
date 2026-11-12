@@ -1,0 +1,69 @@
+name: 'Add a Template'
+description: 'Add a Template for Espanso Super Tools'
+title: '[TEMPLATE] '
+labels: ['template', 'submission']
+body:
+  - type: markdown
+    attributes:
+      value: 'Thanks for helping improve Espanso Super Tools! Please fill out the details below.'
+  - type: input
+    id: template-name
+    attributes:
+      label: 'Template Name'
+      description: 'What is the name of your template?'
+    validations:
+      required: true
+  - type: input
+    id: template-url
+    attributes:
+      label: 'Template Link'
+      description: 'Share a publicly accessible template link.'
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 'Description'
+      description: 'What does this template do? Who is it for?'
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: 'Key Features'
+      description: 'List any standout features.'
+    validations:
+      required: false
+  - type: dropdown
+    id: category
+    attributes:
+      label: 'Category'
+      options:
+        - 'Text Expansion'
+        - 'Shell scripts'
+        - 'Python scripts'
+        - 'Code generation'
+        - 'Software specific'
+        - 'Other'
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 'Before You Submit'
+      options:
+        - label: 'The template is publicly accessible.'
+          required: true
+        - label: 'I created this template or have permission to share it.'
+          required: true
+        - label: 'I checked existing issues for similar submissions.'
+          required: true
+        - label: 'I have removed sensitive or private information.'
+          required: true
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: 'Additional Notes'
+      description: 'Anything else you would like to include?'
+    validations:
+      required: false
