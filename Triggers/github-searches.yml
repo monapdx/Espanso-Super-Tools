@@ -1,0 +1,14 @@
+# GitHub search shortcuts for Espanso.
+# For :chrometab and :htmlstorage, select Code in GitHub search results.
+matches:
+  - trigger: ":doc"
+    replace: 'type:issue state:open label:documentation'
+
+  - trigger: ":first"
+    replace: 'type:issue state:open label:"good first issue"'
+
+  - trigger: ":chrometab"
+    replace: 'path:manifest.json "chrome_url_overrides"'
+
+  - trigger: ":htmlstorage"
+    replace: 'path:*.html "localStorage.setItem"'
