@@ -61,3 +61,11 @@ It includes triggers to create code blocks (even nested ones that contain markdo
 `obsidian.yml` is a collection of triggers for use with the popular note taking software Obsidian. 
 
 It has triggers for automatically adding frontmatter to notes depending on the type of content, and even a form that will help you generate a manifest.js file for creating an Obsidian plugin.
+
+## Espanso Quizzes
+
+**[Download espanso-quiz-builder.zip](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/espanso-quiz-builder.zip)**
+
+After you download, extract the files and move them into your `/match` folder for Espanso.
+
+You should now be able to use the trigger :quiz to make a form popup. Enter a title and description for your quiz, and one correct answer per line, then submit. It will create a folder called /Espanso-Quizzes in Documents, and save new quizzes to that location. 
