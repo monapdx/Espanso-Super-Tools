@@ -1,36 +1,57 @@
-# Optional trigger packs
+# Triggers
 
-Install only what you want. On standard Windows installations, open `%APPDATA%\espanso\match`. For a `.yml` pack, download the raw file rather than saving the GitHub HTML page, and place it inside that folder. Restart Espanso if it does not reload automatically.
+Here are some collections you can add to Espanso to start doing useful things without writing all the triggers yourself.
+
+On Windows, press **Win+R**, paste `%APPDATA%\espanso\match`, and press Enter to open your match folder.
+
+The download links below open the actual files. For a `.yml` file, save that file in your match folder, keeping the `.yml` extension. Restart Espanso if your new shortcuts don't start working automatically.
 
 ## Table form
 
-Download [table-generator.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/table-generator.yml) into your match folder. Requires Windows PowerShell.
+**[Download table-generator.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/table-generator.yml)**
 
-Type **`:mdtable`** to open a form with two dropdown selections, a title, and multiline content. It outputs a fixed field/value Markdown table, a content block, and a complete styled HTML document inside a code fence. It does not ask for arbitrary row/column counts. Customize dropdown options and labels in the YAML.
+Type **`:mdtable`** to bring up a form with two dropdowns, a title, and a space for whatever content you want to include. Fill it out, submit it, and it will write a table in Markdown, followed by an HTML version of the same information.
 
-The HTML is source text: copy the document out of the code fence into an `.html` file to view it. Form values are HTML-encoded. Markdown table fields escape pipes and line breaks, and content fences adapt to embedded backticks.
+This one uses a set layout: a Field column and a Value column. You can open the YAML file in your text editor to change the dropdown options and labels to whatever makes sense for you. It needs Windows PowerShell to make the HTML version.
 
-The HTML element pack separately uses **`:table`** for `<table></table>`; the names intentionally differ. If you previously installed the form as `:table`, replace that old definition rather than keeping both.
+The HTML version includes the code for a whole webpage. Copy everything from `<!doctype html>` through `</html>` into a new file, save it with an `.html` extension, and open it in your browser to see the result. Leave out the lines of tildes (`~~~`) that surround the code in the output.
+
+If you installed an earlier version using `:table`, replace that old trigger with this one. The HTML collection below already uses `:table` to insert a table element, so this form uses `:mdtable` to keep the two from getting mixed up.
 
 ## HTML elements
 
-Download [html.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/html.yml) into your match folder.
+**[Download html.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/html.yml)**
 
-Includes 102 HTML element snippets. Type a trigger followed by Space: for example, `:article` inserts `<article></article>` and places the cursor inside. `$|$` in the YAML marks the cursor position. Void elements such as `<img>` have no closing tag.
+`html.yml` is a collection of triggers that correspond to HTML elements. It contains 102 of them, and you can add or remove whatever ones you don't need or that conflict with other triggers you use.
 
-Some triggers use memorable aliases: `:para` → `<p>`, `:url` → `<a>`, `:row` → `<tr>`, and `:cell` → `<td>`. Edit or remove triggers that conflict with your own collection. This is a broad collection, not every HTML element.
+Type a trigger and then press Space. For example, `:article` becomes `<article></article>`, with your cursor between the tags so you can start typing right away.
+
+Some use slightly different names: `:para` inserts a paragraph, `:url` inserts a link, `:row` inserts a table row, and `:cell` inserts a table cell.
+
+If you're editing the file yourself, `$|$` marks where the cursor will go. Elements like `<img>` don't need a closing tag, so those shortcuts only insert the opening one.
 
 ## Custom color names
 
-Download [espanso-mycolor.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-mycolor.zip) into your match folder and extract it there. Open the extracted folder and run **`setup-windows.bat`** once, then restart Espanso. Requires Python 3.10+ with tkinter; setup installs PyYAML and configures the actual extracted script path. Extra extraction folders are supported.
+**[Download espanso-mycolor.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-mycolor.zip)**
 
-Type **`:mycolor`**, enter a name such as `brandpink` and a hex code such as `#e69dfc`, then select:
+You can develop your own color vocabulary, using names you actually remember instead of looking up hex codes every time you need them.
 
-- **Save to my colors:** adds the trigger to `match/mycolors.yml`. Typing `:brandpink` then inserts `#e69dfc`. Updating an existing color asks for confirmation.
-- **Generate YAML only:** inserts YAML in the active editor without saving a match file. When merging into an existing file, copy only the match list entry beneath `matches:`.
+1. Save the ZIP in your match folder and extract it there.
+2. Open the extracted folder and double-click **`setup-windows.bat`**. You'll need Python 3.10 or newer installed. The normal Windows Python installer includes tkinter, which is what the helper uses to show its messages. Setup installs PyYAML and tells the trigger where to find the script, even if extracting the ZIP created an extra folder.
+3. Restart Espanso, then type **`:mycolor`**.
 
-These are separate files: the bundled **`mycolor.yml` defines the form**; **`mycolors.yml` stores your created colors** and is created on the first save. There is no need to ship an empty palette.
+The form asks for a hex code and the name you want to use for it. For example, enter `brandpink` and `#e69dfc`. Choose **Save to my colors**, submit it, and now typing `:brandpink` will insert `#e69dfc`.
 
-Remove older `:mycolor` definitions and older extracted package folders before installing. Keep existing color data. If migrating from `my-colors.yml`, back it up and rename it to `mycolors.yml` only if the destination does not exist; merge manually if both files exist. Duplicate triggers in other YAML files are blocked during saving.
+If you'd rather add the trigger to a file yourself, choose **Generate YAML only**. It will write the YAML into whatever editor you're using. When adding it to a file that already has a `matches:` line, copy just the trigger underneath that line, rather than adding a second one.
 
-Run setup again after moving the extracted folder. The package README contains backup, validation, removal, and troubleshooting details. Remove the extracted package to uninstall the form; your saved colors remain independently usable.
+**`mycolor.yml` is the trigger that brings up the form. `mycolors.yml` is the separate file where it stores the color triggers you add.** The second file gets created when you save your first color.
+
+Use the same name again if you want to change its color. It will show you the old code and ask before replacing it. If that name is already used by a trigger in another YAML file, it will ask you to choose a different name instead.
+
+### If you tried an earlier version
+
+Remove the old `:mycolor` trigger or extracted folder before installing this one, but keep your saved colors. Having two copies of the form trigger makes Espanso ask you which one you want each time.
+
+If your old colors are in `my-colors.yml`, make a backup and rename it to `mycolors.yml`. If you already have both files, combine their color entries yourself rather than replacing either file and losing some of your colors.
+
+Run setup again if you move the extracted folder. There are more details about backups and troubleshooting in the README inside the ZIP. If you decide you don't want the form anymore, remove its extracted folder. Your saved colors will still work.

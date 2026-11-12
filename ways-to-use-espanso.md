@@ -14,7 +14,11 @@ So for example:
 
 `:section = <section></section>`
 
-Short triggers can expand before you finish typing a longer one if they expand immediately. Adding `word: true` makes Espanso wait for a word boundary, such as Space. The HTML pack uses that setting. Memorable names like `:para` are also useful when you want to avoid collisions with your own shortcuts.
+A few are worth giving a longer name. For example, if you make the trigger `:b` and it replaces the text as soon as you type it, you won't get a chance to finish typing another shortcut that starts with `:b`.
+
+You can use a name like `:bold` instead. Or add `word: true`, like in the example below, so Espanso waits until you press Space before replacing it. The HTML collection uses that setting.
+
+For the paragraph tag, I used `:para` instead of just `:p`.
 
 Here is how the actual triggers would be setup as YAML:
 
@@ -45,9 +49,11 @@ Here is how the actual trigger would be setup as YAML:
     replace: "#e69dfc"
 ```
 
-To create your own color vocabulary, download **[espanso-mycolor.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-mycolor.zip)** into your Espanso match folder and extract it there. Run `setup-windows.bat` inside the extracted folder once, then restart Espanso. Python 3.10+ with tkinter is required; setup installs PyYAML and sets the script path.
+If you want to set up your own color vocabulary using Espanso, download **[espanso-mycolor.zip](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/espanso-mycolor.zip)** into your Espanso match folder and extract it there. Run `setup-windows.bat` inside the extracted folder once, then restart Espanso. You'll need Python 3.10 or newer, with tkinter (included in the normal Windows Python installation). Setup installs the extra Python tool it needs, PyYAML, and makes sure it can find the script.
 
-Type `:mycolor` to open the form. Enter a name and hex code, then save the trigger or generate YAML to paste yourself. **`mycolor.yml` defines the form; the separate `mycolors.yml` stores the color triggers you create.** See the [complete installation instructions](Triggers/Triggers.md#custom-color-names).
+That will make a form pop up when you type `:mycolor`, asking for the hex code and the name you want to use for it. Then when you submit it, it will write the trigger and add it to a file called `mycolors.yml`. You can also choose to have it write out the YAML for you to copy and paste yourself.
+
+**`mycolor.yml` is the form trigger. `mycolors.yml` is your collection of color triggers.** The [setup instructions](Triggers/Triggers.md#custom-color-names) explain it step by step.
 
 Never copy and paste another color code when writing CSS again. You're welcome.
 
@@ -129,6 +135,7 @@ For example, here is one of my triggers that outlines every element on the page,
         el.style.outline = "1px solid magenta";
       }); 
 ```
+
 
 
 
