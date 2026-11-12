@@ -1,0 +1,105 @@
+# Obsidian note templates and Windows plain-JavaScript plugin starter.
+# Copy into your Espanso match folder; no helper installation required.
+matches:
+- trigger: :idea
+  replace: |
+    ---
+    title:
+    category:
+    medium:
+    thesis:
+    date: {{idea_date}}
+    ---
+  vars:
+  - name: idea_date
+    type: date
+    params:
+      format: '%Y-%m-%d'
+- trigger: :project
+  replace: |
+    ---
+    title:
+    type:
+    problem:
+    solution:
+    date: {{project_date}}
+    ---
+  vars:
+  - name: project_date
+    type: date
+    params:
+      format: '%Y-%m-%d'
+- trigger: :plugin
+  word: true
+  replace: '{{create_plugin}}'
+  vars:
+  - name: plugin_form
+    type: form
+    params:
+      layout: |-
+        New Obsidian plugin
+
+        Plugin name: [[name]]
+
+        Plugin ID (blank = derive from name): [[id]]
+
+        Version: [[version]]
+
+        Author: [[author]]
+
+        Description: [[description]]
+
+        Minimum supported Obsidian version: [[minimum]]
+
+        Desktop only? [[desktop]]
+
+        Author website (optional): [[website]]
+
+        Funding URL (optional): [[funding]]
+
+        Existing parent folder (creates a plugin-ID subfolder):
+
+        [[parent]]
+      fields:
+        name: {}
+        id: {}
+        version:
+          default: 1.0.0
+        author: {}
+        description:
+          multiline: true
+        minimum:
+          default: 1.0.0
+        desktop:
+          type: choice
+          values:
+          - 'Yes'
+          - 'No'
+          default: 'Yes'
+        website: {}
+        funding: {}
+        parent: {}
+  - name: create_plugin
+    type: shell
+    depends_on:
+    - plugin_form
+    params:
+      shell: powershell
+      cmd: |
+        $request = @{
+          name = $env:ESPANSO_PLUGIN_FORM_NAME
+          id = $env:ESPANSO_PLUGIN_FORM_ID
+          version = $env:ESPANSO_PLUGIN_FORM_VERSION
+          author = $env:ESPANSO_PLUGIN_FORM_AUTHOR
+          description = $env:ESPANSO_PLUGIN_FORM_DESCRIPTION
+          minimum = $env:ESPANSO_PLUGIN_FORM_MINIMUM
+          desktop = $env:ESPANSO_PLUGIN_FORM_DESKTOP
+          website = $env:ESPANSO_PLUGIN_FORM_WEBSITE
+          funding = $env:ESPANSO_PLUGIN_FORM_FUNDING
+          parent = $env:ESPANSO_PLUGIN_FORM_PARENT
+        } | ConvertTo-Json -Compress
+        $request64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($request))
+        $worker = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('JEVycm9yQWN0aW9uUHJlZmVyZW5jZSA9ICdTdG9wJwpBZGQtVHlwZSAtQXNzZW1ibHlOYW1lIFN5c3RlbS5XaW5kb3dzLkZvcm1zCnRyeSB7CiAgJGRhdGEgPSBbVGV4dC5FbmNvZGluZ106OlVURjguR2V0U3RyaW5nKFtDb252ZXJ0XTo6RnJvbUJhc2U2NFN0cmluZygnX19SRVFVRVNUX18nKSkgfCBDb252ZXJ0RnJvbS1Kc29uCiAgZm9yZWFjaCAoJGZpZWxkIGluIEAoJ25hbWUnLCdhdXRob3InLCdkZXNjcmlwdGlvbicsJ3BhcmVudCcsJ3ZlcnNpb24nLCdtaW5pbXVtJykpIHsKICAgIGlmIChbc3RyaW5nXTo6SXNOdWxsT3JXaGl0ZVNwYWNlKCRkYXRhLiRmaWVsZCkpIHsgdGhyb3cgIlBsZWFzZSBmaWxsIGluOiAkZmllbGQiIH0KICB9CiAgJGlkID0gKFtzdHJpbmddJGRhdGEuaWQpLlRyaW0oKQogIGlmICgtbm90ICRpZCkgeyAkaWQgPSAoJGRhdGEubmFtZS5Ub0xvd2VySW52YXJpYW50KCkgLXJlcGxhY2UgJ1teYS16XSsnLCctJykuVHJpbSgnLScpIH0KICBpZiAoJGlkIC1ub3RtYXRjaCAnXlthLXpdKygtW2Etel0rKSokJyAtb3IgJGlkIC1tYXRjaCAnb2JzaWRpYW58cGx1Z2luJCcgLW9yICRpZCAtbWF0Y2ggJ14oY29ufHBybnxhdXh8bnVsKSQnKSB7CiAgICB0aHJvdyAnUGx1Z2luIElEIG11c3QgdXNlIGxvd2VyY2FzZSBsZXR0ZXJzIGFuZCBzaW5nbGUgaHlwaGVucywgY2Fubm90IGNvbnRhaW4gb2JzaWRpYW4gb3IgZW5kIHdpdGggcGx1Z2luLCBhbmQgbXVzdCBiZSBhIHZhbGlkIGZvbGRlciBuYW1lLicKICB9CiAgaWYgKCRkYXRhLm5hbWUgLW1hdGNoICcoP2kpb2JzaWRpYW58cGx1Z2luJykgeyB0aHJvdyAnQ2hvb3NlIGEgZGlzcGxheSBuYW1lIHdpdGhvdXQgdGhlIHdvcmRzIE9ic2lkaWFuIG9yIFBsdWdpbi4nIH0KICBmb3JlYWNoICgkZmllbGQgaW4gQCgndmVyc2lvbicsJ21pbmltdW0nKSkgewogICAgaWYgKCRkYXRhLiRmaWVsZCAtbm90bWF0Y2ggJ14oMHxbMS05XVswLTldKilcLigwfFsxLTldWzAtOV0qKVwuKDB8WzEtOV1bMC05XSopJCcpIHsgdGhyb3cgIiRmaWVsZCBtdXN0IHVzZSB4Lnkueiwgc3VjaCBhcyAxLjAuMC4iIH0KICB9CiAgZm9yZWFjaCAoJGZpZWxkIGluIEAoJ3dlYnNpdGUnLCdmdW5kaW5nJykpIHsKICAgICR2YWx1ZSA9IChbc3RyaW5nXSRkYXRhLiRmaWVsZCkuVHJpbSgpCiAgICBpZiAoJHZhbHVlIC1hbmQgJHZhbHVlIC1ub3RtYXRjaCAnXmh0dHBzPzovL1teXHMvXSsoPzovW15cc10qKT8kJykgeyB0aHJvdyAiJGZpZWxkIG11c3QgYmUgYSBjb21wbGV0ZSBodHRwIG9yIGh0dHBzIFVSTCwgb3IgYmxhbmsuIiB9CiAgfQogICRwYXJlbnQgPSBbRW52aXJvbm1lbnRdOjpFeHBhbmRFbnZpcm9ubWVudFZhcmlhYmxlcygoW3N0cmluZ10kZGF0YS5wYXJlbnQpLlRyaW0oKS5UcmltKCciJykpCiAgaWYgKC1ub3QgW0lPLlBhdGhdOjpJc1BhdGhSb290ZWQoJHBhcmVudCkgLW9yIC1ub3QgKFRlc3QtUGF0aCAtTGl0ZXJhbFBhdGggJHBhcmVudCAtUGF0aFR5cGUgQ29udGFpbmVyKSkgeyB0aHJvdyAnQ2hvb3NlIGFuIGV4aXN0aW5nIHBhcmVudCBmb2xkZXIgdXNpbmcgaXRzIGZ1bGwgcGF0aC4nIH0KICAkdGFyZ2V0ID0gSm9pbi1QYXRoIChHZXQtSXRlbSAtTGl0ZXJhbFBhdGggJHBhcmVudCkuRnVsbE5hbWUgJGlkCiAgaWYgKFRlc3QtUGF0aCAtTGl0ZXJhbFBhdGggJHRhcmdldCkgeyB0aHJvdyAiQWxyZWFkeSBleGlzdHM7IG5vdGhpbmcgY2hhbmdlZDogJHRhcmdldCIgfQogICRtYW5pZmVzdCA9IFtvcmRlcmVkXUB7CiAgICBpZD0kaWQ7IG5hbWU9JGRhdGEubmFtZS5UcmltKCk7IHZlcnNpb249JGRhdGEudmVyc2lvbjsgbWluQXBwVmVyc2lvbj0kZGF0YS5taW5pbXVtCiAgICBkZXNjcmlwdGlvbj0kZGF0YS5kZXNjcmlwdGlvbi5UcmltKCk7IGF1dGhvcj0kZGF0YS5hdXRob3IuVHJpbSgpOyBpc0Rlc2t0b3BPbmx5PSgkZGF0YS5kZXNrdG9wIC1lcSAnWWVzJykKICB9CiAgaWYgKCRkYXRhLndlYnNpdGUpIHsgJG1hbmlmZXN0LmF1dGhvclVybD0kZGF0YS53ZWJzaXRlLlRyaW0oKSB9CiAgaWYgKCRkYXRhLmZ1bmRpbmcpIHsgJG1hbmlmZXN0LmZ1bmRpbmdVcmw9JGRhdGEuZnVuZGluZy5UcmltKCkgfQogICR2ZXJzaW9ucyA9IFtvcmRlcmVkXUB7fTsgJHZlcnNpb25zWyRkYXRhLnZlcnNpb25dPSRkYXRhLm1pbmltdW0KICAkbWFpbiA9IEAnCmNvbnN0IHsgUGx1Z2luLCBOb3RpY2UgfSA9IHJlcXVpcmUoJ29ic2lkaWFuJyk7Cgptb2R1bGUuZXhwb3J0cyA9IGNsYXNzIFN0YXJ0ZXJQbHVnaW4gZXh0ZW5kcyBQbHVnaW4gewogIG9ubG9hZCgpIHsKICAgIHRoaXMuYWRkQ29tbWFuZCh7CiAgICAgIGlkOiAnc2hvdy1ncmVldGluZycsCiAgICAgIG5hbWU6ICdTaG93IGdyZWV0aW5nJywKICAgICAgY2FsbGJhY2s6ICgpID0+IG5ldyBOb3RpY2UodGhpcy5tYW5pZmVzdC5uYW1lICsgJyBpcyB3b3JraW5nIScpLAogICAgfSk7CiAgICAvLyBBZGQgeW91ciBwbHVnaW4gZnVuY3Rpb25hbGl0eSBoZXJlLgogICAgLy8gVXNlIHRoaXMucmVnaXN0ZXJFdmVudCAvIHRoaXMucmVnaXN0ZXJEb21FdmVudCBmb3IgYXV0b21hdGljIGNsZWFudXAuCiAgfQoKICBvbnVubG9hZCgpIHsKICAgIC8vIENsZWFuIHVwIHJlc291cmNlcyBub3QgcmVnaXN0ZXJlZCB3aXRoIE9ic2lkaWFuLgogIH0KfTsKJ0AKICAkcmVhZG1lID0gJyMgJyArICRtYW5pZmVzdC5uYW1lICsgImByYG5gcmBuIiArICRtYW5pZmVzdC5kZXNjcmlwdGlvbiArIEAnCgoKIyMgRGV2ZWxvcG1lbnQKCkVkaXQgbWFpbi5qcyBkaXJlY3RseS4gVGhpcyBwbGFpbiBKYXZhU2NyaXB0IHN0YXJ0ZXIgcmVxdWlyZXMgbm8gbnBtIGluc3RhbGwgb3IgYnVpbGQgc3RlcC4KSXQgY3VycmVudGx5IHByb3ZpZGVzIG9uZSBleGFtcGxlIGNvbW1hbmQ6IFNob3cgZ3JlZXRpbmcuCgojIyBUZXN0IGluIE9ic2lkaWFuCgoxLiBDb3B5IHRoaXMgZW50aXJlIGZvbGRlciBpbnRvIGEgdGVzdCB2YXVsdCdzIC5vYnNpZGlhbi9wbHVnaW5zLyBmb2xkZXIuCjIuIEVuYWJsZSBjb21tdW5pdHkgcGx1Z2lucyBhbmQgcmVsb2FkIE9ic2lkaWFuLgozLiBFbmFibGUgdGhpcyBwbHVnaW4gaW4gU2V0dGluZ3MgPiBDb21tdW5pdHkgcGx1Z2lucy4KNC4gUnVuIGl0cyBTaG93IGdyZWV0aW5nIGNvbW1hbmQgZnJvbSB0aGUgY29tbWFuZCBwYWxldHRlLgoKSWYgeW91IGdlbmVyYXRlZCB0aGUgZm9sZGVyIGRpcmVjdGx5IGluIC5vYnNpZGlhbi9wbHVnaW5zLywgc2tpcCB0aGUgY29weSBzdGVwLgpSZWxvYWQgb3IgZGlzYWJsZS9yZS1lbmFibGUgdGhlIHBsdWdpbiBhZnRlciBlZGl0aW5nIGl0cyBmaWxlcy4KCiMjIFJlbGVhc2UgY2hlY2tsaXN0CgpJbXBsZW1lbnQgYW5kIHRlc3QgeW91ciBmdW5jdGlvbmFsaXR5LiBTZXQgbWluQXBwVmVyc2lvbiB0byB0aGUgb2xkZXN0IHZlcnNpb24KYWN0dWFsbHkgc3VwcG9ydGVkIGJ5IHlvdXIgY29kZS4gVGVzdCBvbiBtb2JpbGUgYmVmb3JlIGRlY2xhcmluZyBtb2JpbGUgc3VwcG9ydC4KQ2hvb3NlIGEgbGljZW5zZSBiZWZvcmUgcHVibGlzaGluZzsgbm8gbGljZW5zZSBpcyBzZWxlY3RlZCBieSB0aGlzIGdlbmVyYXRvci4KVXBkYXRlIG1hbmlmZXN0Lmpzb24gYW5kIHZlcnNpb25zLmpzb24gd2hlbiByZWxlYXNpbmcgYSBuZXcgdmVyc2lvbi4KUmVsZWFzZSBmaWxlczogbWFuaWZlc3QuanNvbiwgbWFpbi5qcywgYW5kIHN0eWxlcy5jc3MgaWYgdXNlZC4KQ2hlY2sgY3VycmVudCBjb21tdW5pdHkgc3VibWlzc2lvbiByZXF1aXJlbWVudHMgYmVmb3JlIHN1Ym1pdHRpbmcuCidACiAgJGZpbGVzID0gW29yZGVyZWRdQHsKICAgICdtYW5pZmVzdC5qc29uJz0oJG1hbmlmZXN0IHwgQ29udmVydFRvLUpzb24gLURlcHRoIDUpCiAgICAndmVyc2lvbnMuanNvbic9KCR2ZXJzaW9ucyB8IENvbnZlcnRUby1Kc29uKQogICAgJ21haW4uanMnPSRtYWluCiAgICAnc3R5bGVzLmNzcyc9Jy8qIEFkZCB5b3VyIHBsdWdpbiBzdHlsZXMgaGVyZS4gKi8nCiAgICAnUkVBRE1FLm1kJz0kcmVhZG1lCiAgICAnLmdpdGlnbm9yZSc9Im5vZGVfbW9kdWxlcy9gcmBuLkRTX1N0b3JlYHJgblRodW1icy5kYmByYG4iCiAgfQogICMgQnVpbGQgYmVzaWRlIHRoZSB0YXJnZXQsIHRoZW4gcmVuYW1lIHdpdGhvdXQgcmVwbGFjaW5nIGFuIGV4aXN0aW5nIGRpcmVjdG9yeS4KICAkc3RhZ2UgPSBKb2luLVBhdGggJHBhcmVudCAoJy5lc3BhbnNvLXBsdWdpbi0nICsgW2d1aWRdOjpOZXdHdWlkKCkuVG9TdHJpbmcoJ04nKSkKICBbdm9pZF1bSU8uRGlyZWN0b3J5XTo6Q3JlYXRlRGlyZWN0b3J5KCRzdGFnZSkKICB0cnkgewogICAgZm9yZWFjaCAoJGZpbGUgaW4gJGZpbGVzLktleXMpIHsgW0lPLkZpbGVdOjpXcml0ZUFsbFRleHQoKEpvaW4tUGF0aCAkc3RhZ2UgJGZpbGUpLCAkZmlsZXNbJGZpbGVdLCAoTmV3LU9iamVjdCBUZXh0LlVURjhFbmNvZGluZygkZmFsc2UpKSkgfQogICAgW0lPLkRpcmVjdG9yeV06Ok1vdmUoJHN0YWdlLCAkdGFyZ2V0KQogIH0gZmluYWxseSB7CiAgICBpZiAoVGVzdC1QYXRoIC1MaXRlcmFsUGF0aCAkc3RhZ2UpIHsgUmVtb3ZlLUl0ZW0gLUxpdGVyYWxQYXRoICRzdGFnZSAtUmVjdXJzZSAtRm9yY2UgfQogIH0KICBTdGFydC1Qcm9jZXNzIGV4cGxvcmVyLmV4ZSAtQXJndW1lbnRMaXN0ICgnIicgKyAkdGFyZ2V0ICsgJyInKQp9IGNhdGNoIHsKICBbdm9pZF1bV2luZG93cy5Gb3Jtcy5NZXNzYWdlQm94XTo6U2hvdygkXy5FeGNlcHRpb24uTWVzc2FnZSwgJ1BsdWdpbiBzdGFydGVyJywgJ09LJywgJ0Vycm9yJykKfQo='))
+        $worker = $worker.Replace('__REQUEST__', $request64)
+        $encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($worker))
+        Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @('-NoProfile', '-STA', '-EncodedCommand', $encoded) | Out-Null
