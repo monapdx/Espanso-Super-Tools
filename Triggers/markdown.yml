@@ -1,0 +1,24 @@
+matches:
+  - trigger: ":block"
+    replace: |
+      ```
+      $|$
+      ```
+
+  - trigger: ":nested"
+    replace: |
+      ````markdown
+      $|$
+      ```
+
+      ```
+      ````
+
+  - trigger: ":blink"
+    replace: "**[$|$]()**"
+
+  - trigger: ":hyper"
+    replace: "[$|$](https://)"
+
+  - trigger: ":inline"
+    replace: "`$|$`"
