@@ -16,8 +16,6 @@ This one uses a set layout: a Field column and a Value column. You can open the 
 
 The HTML version includes the code for a whole webpage. Copy everything from `<!doctype html>` through `</html>` into a new file, save it with an `.html` extension, and open it in your browser to see the result. Leave out the lines of tildes (`~~~`) that surround the code in the output.
 
-If you installed an earlier version using `:table`, replace that old trigger with this one. The HTML collection below already uses `:table` to insert a table element, so this form uses `:mdtable` to keep the two from getting mixed up.
-
 ## HTML elements
 
 **[Download html.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/html.yml)**
@@ -47,11 +45,3 @@ If you'd rather add the trigger to a file yourself, choose **Generate YAML only*
 **`mycolor.yml` is the trigger that brings up the form. `mycolors.yml` is the separate file where it stores the color triggers you add.** The second file gets created when you save your first color.
 
 Use the same name again if you want to change its color. It will show you the old code and ask before replacing it. If that name is already used by a trigger in another YAML file, it will ask you to choose a different name instead.
-
-### If you tried an earlier version
-
-Remove the old `:mycolor` trigger or extracted folder before installing this one, but keep your saved colors. Having two copies of the form trigger makes Espanso ask you which one you want each time.
-
-If your old colors are in `my-colors.yml`, make a backup and rename it to `mycolors.yml`. If you already have both files, combine their color entries yourself rather than replacing either file and losing some of your colors.
-
-Run setup again if you move the extracted folder. There are more details about backups and troubleshooting in the README inside the ZIP. If you decide you don't want the form anymore, remove its extracted folder. Your saved colors will still work.
