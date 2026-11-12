@@ -69,3 +69,18 @@ It has triggers for automatically adding frontmatter to notes depending on the t
 After you download, extract the files and move them into your `/match` folder for Espanso.
 
 You should now be able to use the trigger :quiz to make a form popup. Enter a title and description for your quiz, and one correct answer per line, then submit. It will create a folder called /Espanso-Quizzes in Documents, and save new quizzes to that location. 
+
+## Github Issue Template Generator
+
+**[Download github-issue-builder.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/github-issue-builder.yml)**
+
+This will pull up an Espanso form that helps you generate valid YAML for Github Issue Templates.
+
+## Github Searches
+
+**[Download github-searches.yml](https://github.com/monapdx/Espanso-Super-Tools/blob/main/Triggers/github-searches.yml)**
+
+This is a YAML file with several useful Github searches assigned to triggers. Change the trigger names, add your own, etc.
+
+
+
