@@ -1,0 +1,301 @@
+# Windows / Espanso 2.x. Single file; uses built-in Windows PowerShell.
+matches:
+- trigger: :issueform
+  replace: '{{output}}'
+  force_mode: clipboard
+  vars:
+  - name: form
+    type: form
+    params:
+      layout: 'Create a GitHub Issue Template
+
+
+        Template purpose
+
+        [[preset]]
+
+        Project or website name
+
+        [[project]]
+
+        Custom template name (blank = preset)
+
+        [[customname]]
+
+        Issue title prefix
+
+        [[prefix]]
+
+        Labels (must already exist in your repo)
+
+        [[labels]]
+
+        Introduction
+
+        [[intro]]
+
+        Category field
+
+        [[category]]
+
+        Categories, one per line (used when included)
+
+        [[categories]]
+
+        Suggest a category (used with Category)
+
+        [[newcategory]]
+
+        Screenshots
+
+        [[screenshot]]
+
+        Submission checklist
+
+        [[checklist]]
+
+        Your requirements, one per line (blank = no additions)
+
+        [[requirements]]
+
+        Additional notes
+
+        [[notes]]
+
+        '
+      fields:
+        preset:
+          type: choice
+          values:
+          - Template submission
+          - Bug report
+          - Feature request
+          - General feedback
+          default: Template submission
+        project:
+          default: My Project
+        customname: {}
+        prefix:
+          type: choice
+          values:
+          - Preset prefix
+          - None
+          default: Preset prefix
+        labels:
+          type: choice
+          values:
+          - Preset labels
+          - None
+          default: Preset labels
+        intro:
+          type: choice
+          values:
+          - Standard welcome
+          - None
+          default: Standard welcome
+        category:
+          type: choice
+          values:
+          - Omit
+          - Required
+          - Optional
+          default: Omit
+        categories:
+          multiline: true
+        newcategory:
+          type: choice
+          values:
+          - Include
+          - Omit
+          default: Include
+        screenshot:
+          type: choice
+          values:
+          - Optional
+          - Required
+          - Omit
+          default: Optional
+        checklist:
+          type: choice
+          values:
+          - Standard + my requirements
+          - Custom requirements only
+          - Omit
+          default: Standard + my requirements
+        requirements:
+          multiline: true
+        notes:
+          type: choice
+          values:
+          - Optional
+          - Required
+          - Omit
+          default: Optional
+  - name: preset
+    type: echo
+    params:
+      echo: '{{form.preset}}'
+  - name: project
+    type: echo
+    params:
+      echo: '{{form.project}}'
+  - name: customname
+    type: echo
+    params:
+      echo: '{{form.customname}}'
+  - name: prefix
+    type: echo
+    params:
+      echo: '{{form.prefix}}'
+  - name: labels
+    type: echo
+    params:
+      echo: '{{form.labels}}'
+  - name: intro
+    type: echo
+    params:
+      echo: '{{form.intro}}'
+  - name: category
+    type: echo
+    params:
+      echo: '{{form.category}}'
+  - name: categories
+    type: echo
+    params:
+      echo: '{{form.categories}}'
+  - name: newcategory
+    type: echo
+    params:
+      echo: '{{form.newcategory}}'
+  - name: screenshot
+    type: echo
+    params:
+      echo: '{{form.screenshot}}'
+  - name: checklist
+    type: echo
+    params:
+      echo: '{{form.checklist}}'
+  - name: requirements
+    type: echo
+    params:
+      echo: '{{form.requirements}}'
+  - name: notes
+    type: echo
+    params:
+      echo: '{{form.notes}}'
+  - name: output
+    type: shell
+    params:
+      shell: powershell
+      cmd: "\n$ErrorActionPreference = 'Stop'\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\nfunction Q($s) { \"'\" + ([string]$s).Replace(\"'\", \"''\").Replace(\"`r\", ' ').Replace(\"`n\", ' ') + \"'\" }\nfunction Field($type,$id,$label,$required,$desc='') {\n  \"  - type: $type\"\n  \"    id: $id\"\n  '    attributes:'\n  '      label: ' + (Q $label)\n  if ($desc) { '      description: ' + (Q $desc) }\n  '    validations:'\n  '      required: ' + $required.ToString().ToLower()\n}\n\n$preset=$env:ESPANSO_PRESET\n$project=$env:ESPANSO_PROJECT\n$names=@{'Template submission'='Add a Template'; 'Bug report'='Report a Bug'; 'Feature request'='Suggest a Feature'; 'General feedback'='Share Feedback'}\n$prefixes=@{'Template submission'='[TEMPLATE] '; 'Bug report'='[BUG] '; 'Feature request'='[FEATURE] '; 'General feedback'='[FEEDBACK] '}\n$labels=@{'Template submission'=\"['template', 'submission']\"; 'Bug report'=\"['bug']\"; 'Feature request'=\"['enhancement']\"; 'General feedback'=\"\
+        ['feedback']\"}\n$name=$names[$preset]\nif (([string]$env:ESPANSO_CUSTOMNAME).Trim()) { $name=([string]$env:ESPANSO_CUSTOMNAME).Trim() }\n'name: ' + (Q $name)\n'description: ' + (Q (\"$name for $project\"))\n$prefix=$prefixes[$preset]\nif ($env:ESPANSO_PREFIX -eq 'None') { $prefix='' }\n'title: ' + (Q $prefix)\nif ($env:ESPANSO_LABELS -eq 'Preset labels') { 'labels: ' + $labels[$preset] }\n'body:'\nif ($env:ESPANSO_INTRO -ne 'None') {\n '  - type: markdown'\n '    attributes:'\n '      value: ' + (Q (\"Thanks for helping improve $project! Please fill out the details below.\"))\n}\nswitch ($preset) {\n 'Template submission' {\n  Field 'input' 'template-name' 'Template Name' $true 'What is the name of your template?'\n  Field 'input' 'template-url' 'Template Link' $true 'Share a publicly accessible template link.'\n  Field 'textarea' 'description' 'Description' $true 'What does this template do? Who is it for?'\n  Field 'textarea' 'features' 'Key Features' $false 'List any standout\
+        \ features.'\n }\n 'Bug report' {\n  Field 'textarea' 'problem' 'What went wrong?' $true\n  Field 'textarea' 'steps' 'Steps to Reproduce' $true 'Tell us how to make the problem happen.'\n  Field 'textarea' 'expected' 'What did you expect to happen?' $true\n  Field 'input' 'version' 'Version' $false\n }\n 'Feature request' {\n  Field 'textarea' 'problem' 'What would this help you do?' $true\n  Field 'textarea' 'suggestion' 'Your Suggestion' $true\n  Field 'textarea' 'alternatives' 'Other Ideas You Have Considered' $false\n }\n 'General feedback' {\n  Field 'textarea' 'feedback' 'Your Feedback' $true\n }\n}\nif ($env:ESPANSO_CATEGORY -ne 'Omit') {\n $categories=@($env:ESPANSO_CATEGORIES -split '\\r?\\n' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Select-Object -Unique)\n if ($categories.Count -eq 0) { $categories=@('General') }\n $categories=@($categories | Where-Object { $_ -ne 'Other' }) + @('Other')\n '  - type: dropdown'\n '    id: category'\n '    attributes:'\n \"\
+        \      label: 'Category'\"\n '      options:'\n foreach ($c in $categories) { '        - ' + (Q $c) }\n '    validations:'\n '      required: ' + ($env:ESPANSO_CATEGORY -eq 'Required').ToString().ToLower()\n if ($env:ESPANSO_NEWCATEGORY -eq 'Include') { Field 'input' 'new-category' 'Suggest a New Category' $false 'If you selected Other, suggest a category here.' }\n}\nif ($env:ESPANSO_SCREENSHOT -ne 'Omit') { Field 'textarea' 'screenshots' 'Screenshots' ($env:ESPANSO_SCREENSHOT -eq 'Required') 'Drag or paste screenshots into this box.' }\nif ($env:ESPANSO_CHECKLIST -ne 'Omit') {\n '  - type: checkboxes'\n '    id: checklist'\n '    attributes:'\n \"      label: 'Before You Submit'\"\n '      options:'\n $items=@('I checked existing issues for similar submissions.','I have removed sensitive or private information.')\n if ($preset -eq 'Template submission') { $items=@('The template is publicly accessible.','I created this template or have permission to share it.') + $items }\n $custom=@($env:ESPANSO_REQUIREMENTS\
+        \ -split '\\r?\\n' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Select-Object -Unique)\n if ($env:ESPANSO_CHECKLIST -eq 'Custom requirements only') { $items=@() }\n $items=@(@($items) + @($custom) | Select-Object -Unique)\n if ($items.Count -eq 0) { $items=@('I have read and followed the submission requirements.') }\n foreach ($item in $items) { '        - label: ' + (Q $item); '          required: true' }\n}\nif ($env:ESPANSO_NOTES -ne 'Omit') { Field 'textarea' 'additional-notes' 'Additional Notes' ($env:ESPANSO_NOTES -eq 'Required') 'Anything else you would like to include?' }\n"
+      trim: false
+- trigger: :issuefield
+  replace: '{{output}}'
+  force_mode: clipboard
+  vars:
+  - name: form
+    type: form
+    params:
+      layout: 'Add a Field to an Issue Template
+
+        Insert at the end of the body, on an empty line at column 1.
+
+
+        Field type
+
+        [[kind]]
+
+        Field label
+
+        [[label]]
+
+        Required (checkboxes: every item)
+
+        [[required]]
+
+        Help text (or instruction text)
+
+        [[description]]
+
+        Placeholder (answer fields only)
+
+        [[placeholder]]
+
+        Options, one per line (dropdowns / checkboxes)
+
+        [[options]]
+
+        Allow multiple selections (dropdowns only)
+
+        [[multiple]]
+
+        '
+      fields:
+        kind:
+          type: choice
+          values:
+          - Short answer
+          - Long answer
+          - Dropdown
+          - Checkboxes
+          - Screenshot area
+          - Instructions
+          default: Short answer
+        label: {}
+        required:
+          type: choice
+          values:
+          - Required
+          - Optional
+          default: Required
+        description:
+          multiline: true
+        placeholder: {}
+        options:
+          multiline: true
+        multiple:
+          type: choice
+          values:
+          - 'No'
+          - 'Yes'
+          default: 'No'
+  - name: kind
+    type: echo
+    params:
+      echo: '{{form.kind}}'
+  - name: label
+    type: echo
+    params:
+      echo: '{{form.label}}'
+  - name: required
+    type: echo
+    params:
+      echo: '{{form.required}}'
+  - name: description
+    type: echo
+    params:
+      echo: '{{form.description}}'
+  - name: placeholder
+    type: echo
+    params:
+      echo: '{{form.placeholder}}'
+  - name: options
+    type: echo
+    params:
+      echo: '{{form.options}}'
+  - name: multiple
+    type: echo
+    params:
+      echo: '{{form.multiple}}'
+  - name: output
+    type: shell
+    params:
+      shell: powershell
+      cmd: "\n$ErrorActionPreference = 'Stop'\n[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\nfunction Q($s) { \"'\" + ([string]$s).Replace(\"'\", \"''\").Replace(\"`r\", ' ').Replace(\"`n\", ' ') + \"'\" }\nfunction Field($type,$id,$label,$required,$desc='') {\n  \"  - type: $type\"\n  \"    id: $id\"\n  '    attributes:'\n  '      label: ' + (Q $label)\n  if ($desc) { '      description: ' + (Q $desc) }\n  '    validations:'\n  '      required: ' + $required.ToString().ToLower()\n}\n\n$types=@{'Short answer'='input';'Long answer'='textarea';'Dropdown'='dropdown';'Checkboxes'='checkboxes';'Instructions'='markdown';'Screenshot area'='textarea'}\n$type=$types[$env:ESPANSO_KIND]\n$label=([string]$env:ESPANSO_LABEL).Trim()\nif (-not $label) { $label='New Field' }\n$id=($label.ToLowerInvariant() -replace '[^a-z0-9_-]+','-').Trim('-')\nif (-not $id) { $id='field' }\n$id+='-' + [guid]::NewGuid().ToString('N').Substring(0,8)\n'  - type: ' + $type\nif ($type -ne 'markdown') { '    id:\
+        \ ' + $id }\n'    attributes:'\nif ($type -eq 'markdown') {\n $text=$env:ESPANSO_DESCRIPTION\n if (-not $text.Trim()) { $text=$label }\n '      value: ' + (Q $text)\n} else {\n '      label: ' + (Q $label)\n if (([string]$env:ESPANSO_DESCRIPTION).Trim()) { '      description: ' + (Q $env:ESPANSO_DESCRIPTION) }\n if ($type -eq 'input' -or $type -eq 'textarea') {\n  if (([string]$env:ESPANSO_PLACEHOLDER).Trim()) { '      placeholder: ' + (Q $env:ESPANSO_PLACEHOLDER) }\n }\n if ($type -eq 'dropdown' -or $type -eq 'checkboxes') {\n  $items=@($env:ESPANSO_OPTIONS -split '\\r?\\n' | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Select-Object -Unique)\n  if ($items.Count -eq 0) { $items=@('Option 1','Option 2') }\n  if ($type -eq 'dropdown') { '      multiple: ' + ($env:ESPANSO_MULTIPLE -eq 'Yes').ToString().ToLower() }\n  '      options:'\n  foreach ($item in $items) {\n   if ($type -eq 'checkboxes') { '        - label: ' + (Q $item); '          required: ' + ($env:ESPANSO_REQUIRED\
+        \ -eq 'Required').ToString().ToLower() }\n   else { '        - ' + (Q $item) }\n  }\n }\n if ($type -ne 'checkboxes') { '    validations:'; '      required: ' + ($env:ESPANSO_REQUIRED -eq 'Required').ToString().ToLower() }\n}\n"
+      trim: false
