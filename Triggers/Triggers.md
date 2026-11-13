@@ -60,7 +60,9 @@ It includes triggers to create code blocks (even nested ones that contain markdo
 
 `obsidian.yml` is a collection of triggers for use with the popular note taking software Obsidian. 
 
-It has triggers for automatically adding frontmatter to notes depending on the type of content, and even a form that will help you create an Obsidian plugin starter, including `manifest.json`, `main.js`, and other starter files. The plugin starter needs Windows PowerShell; the note templates work on any platform.
+Type `:idea` or `:project` to insert note frontmatter with today's date. Type `:plugin` followed by Space to open the plugin starter form. Choose an existing parent folder using its full path; the helper creates a new subfolder named after your plugin ID, containing `manifest.json`, `main.js`, and the other starter files, then opens it in File Explorer. It will not replace an existing folder. The generated README explains how to test the starter in Obsidian.
+
+The plugin starter needs Windows PowerShell; the note templates work on any platform. These shortcuts are available in all apps unless you configure Espanso to restrict them to Obsidian.
 
 ## Espanso Quizzes
 
@@ -74,7 +76,9 @@ You should now be able to use the trigger :quiz to make a form popup. Enter a ti
 
 **[Download github-issue-builder.yml](https://raw.githubusercontent.com/monapdx/Espanso-Super-Tools/main/Triggers/github-issue-builder.yml)**
 
-Type `:issueform` to pull up an Espanso form that helps you generate valid YAML for Github Issue Templates. Type `:issuefield` to add another field. This one needs Windows PowerShell.
+Type `:issueform` in a text editor to generate YAML for a GitHub issue form. Save the result as a `.yml` file inside your repository's `.github/ISSUE_TEMPLATE/` folder. If you choose preset labels, create those labels in your repository too.
+
+To add another field, put the cursor on a new, empty line at column 1 at the end of the generated file, then type `:issuefield`. The inserted field already includes the indentation needed under `body:`. This one needs Windows PowerShell.
 
 ## Github Searches
 
