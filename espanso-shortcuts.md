@@ -1,6 +1,6 @@
 # Espanso Shortcuts
 
-**104 shortcuts**
+**117 shortcuts**
 
 | Trigger | File | Description |
 | --- | --- | --- |
@@ -14,12 +14,15 @@
 | <code>:bdi</code> | html.yml |  |
 | <code>:bdo</code> | html.yml |  |
 | <code>:blank</code> | html.yml |  |
+| <code>:blink</code> | markdown.yml |  |
+| <code>:block</code> | markdown.yml |  |
 | <code>:blockquote</code> | html.yml |  |
 | <code>:body</code> | html.yml |  |
 | <code>:button</code> | html.yml |  |
 | <code>:canvas</code> | html.yml |  |
 | <code>:caption</code> | html.yml |  |
 | <code>:cell</code> | html.yml |  |
+| <code>:chrometab</code> | github-searches.yml |  |
 | <code>:cite</code> | html.yml |  |
 | <code>:code</code> | html.yml |  |
 | <code>:col</code> | html.yml |  |
@@ -32,12 +35,14 @@
 | <code>:dialog</code> | html.yml |  |
 | <code>:div</code> | html.yml |  |
 | <code>:dl</code> | html.yml |  |
+| <code>:doc</code> | github-searches.yml |  |
 | <code>:dt</code> | html.yml |  |
 | <code>:em</code> | html.yml |  |
 | <code>:embed</code> | html.yml |  |
 | <code>:fieldset</code> | html.yml |  |
 | <code>:figcaption</code> | html.yml |  |
 | <code>:figure</code> | html.yml |  |
+| <code>:first</code> | github-searches.yml |  |
 | <code>:footer</code> | html.yml |  |
 | <code>:h1</code> | html.yml |  |
 | <code>:h2</code> | html.yml |  |
@@ -49,10 +54,16 @@
 | <code>:header</code> | html.yml |  |
 | <code>:hform</code> | html.yml |  |
 | <code>:html</code> | html.yml |  |
+| <code>:htmlstorage</code> | github-searches.yml |  |
+| <code>:hyper</code> | markdown.yml |  |
+| <code>:idea</code> | obsidian.yml |  |
 | <code>:iframe</code> | html.yml |  |
 | <code>:img</code> | html.yml |  |
+| <code>:inline</code> | markdown.yml |  |
 | <code>:input</code> | html.yml |  |
 | <code>:ins</code> | html.yml |  |
+| <code>:issuefield</code> | github-issue-builder.yml |  |
+| <code>:issueform</code> | github-issue-builder.yml |  |
 | <code>:item</code> | html.yml |  |
 | <code>:kbd</code> | html.yml |  |
 | <code>:label</code> | html.yml |  |
@@ -65,8 +76,8 @@
 | <code>:menu</code> | html.yml |  |
 | <code>:meta</code> | html.yml |  |
 | <code>:meter</code> | html.yml |  |
-| <code>:mycolor</code> | espanso-mycolor/mycolor.yml |  |
 | <code>:nav</code> | html.yml |  |
+| <code>:nested</code> | markdown.yml |  |
 | <code>:noscript</code> | html.yml |  |
 | <code>:object</code> | html.yml |  |
 | <code>:ol</code> | html.yml |  |
@@ -75,8 +86,10 @@
 | <code>:output</code> | html.yml |  |
 | <code>:para</code> | html.yml |  |
 | <code>:picture</code> | html.yml |  |
+| <code>:plugin</code> | obsidian.yml |  |
 | <code>:pre</code> | html.yml |  |
 | <code>:progress</code> | html.yml |  |
+| <code>:project</code> | obsidian.yml |  |
 | <code>:row</code> | html.yml |  |
 | <code>:rp</code> | html.yml |  |
 | <code>:rt</code> | html.yml |  |
