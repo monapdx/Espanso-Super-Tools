@@ -1,3 +1,5 @@
+The YAML examples below are individual match entries. Add them beneath the `matches:` line in an existing Espanso match file; if you create a new file, add `matches:` above the entries.
+
 Espanso is much more than a text expander. I've found countless uses for it since installing and setting up my first few triggers. You can create convenient shorthands for entire markup languages, or even use it as a snippet manager for scripts and bits of code you run all the time.
 
 ## HTML Elements
